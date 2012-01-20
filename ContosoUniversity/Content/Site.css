@@ -243,6 +243,11 @@ table th {
     color: Red;
 }
 
+.selectedrow 
+{ 
+    background-color: #EEEEEE; 
+}
+
 nav, 
 #menucontainer {
     margin-top: 40px;

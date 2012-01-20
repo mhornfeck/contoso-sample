@@ -8,6 +8,9 @@ namespace ContosoUniversity.Models
 {
     public class SchoolContext : DbContext
     {
+        // To turn of default Lazy Loading:
+        // For specific navigation properties, omit the virtual keyword when you declare the property, OR
+        // For all navigation properties, set LazyLoadingEnabled to false.
         public DbSet<Course> Courses { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<Enrollment> Enrollments { get; set; }
