@@ -9,7 +9,7 @@ namespace ContosoUniversity.Models
         // An office assignment only exists in relation to the instructor it's assigned to, and therefore 
         // its primary key is also its foreign key to the Instructor entity.
         [Key]
-        public int InstructorID { get; set; }
+        public int PersonID { get; set; }
 
         [MaxLength(50)]
         [Display(Name = "Office Location")]

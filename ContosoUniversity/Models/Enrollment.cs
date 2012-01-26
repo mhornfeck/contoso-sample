@@ -10,7 +10,7 @@ namespace ContosoUniversity.Models
 
         public int CourseID { get; set; }
 
-        public int StudentID { get; set; }
+        public int PersonID { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:#.#}", ApplyFormatInEditMode = true, NullDisplayText = "No grade")]
         public decimal? Grade { get; set; }

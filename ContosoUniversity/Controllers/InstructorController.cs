@@ -26,14 +26,13 @@ namespace ContosoUniversity.Controllers
             var viewModel = new InstructorIndexData();
 
             viewModel.Instructors = db.Instructors
-                .Include(i => i.OfficeAssignment)
                 .Include(i => i.Courses.Select(c => c.Department))
                 .OrderBy(i => i.LastName);
 
             if (id != null)
             {
-                ViewBag.InstructorID = id.Value;
-                viewModel.Courses = viewModel.Instructors.Where(i => i.InstructorID == id.Value).Single().Courses;
+                ViewBag.PersonID = id.Value;
+                viewModel.Courses = viewModel.Instructors.Where(i => i.PersonID == id.Value).Single().Courses;
             }
 
 
@@ -72,7 +71,7 @@ namespace ContosoUniversity.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.InstructorID = new SelectList(db.OfficeAssignments, "InstructorID", "Location");
+            ViewBag.FullName = new SelectList(db.OfficeAssignments, "FullName", "Location");
             return View();
         } 
 
@@ -89,7 +88,7 @@ namespace ContosoUniversity.Controllers
                 return RedirectToAction("Index");  
             }
 
-            ViewBag.InstructorID = new SelectList(db.OfficeAssignments, "InstructorID", "Location", instructor.InstructorID);
+            ViewBag.FullName = new SelectList(db.OfficeAssignments, "FullName", "Location", instructor.FullName);
             return View(instructor);
         }
         
@@ -101,9 +100,8 @@ namespace ContosoUniversity.Controllers
             // can't perform eager loading with the Find method
             // use Where() and Single() instead
             Instructor instructor = db.Instructors
-                .Include(i => i.OfficeAssignment)
                 .Include(i => i.Courses)
-                .Where(i => i.InstructorID == id)
+                .Where(i => i.PersonID == id)
                 .Single();
             PopulateAssignedCourseData(instructor);
             return View(instructor);
@@ -133,9 +131,8 @@ namespace ContosoUniversity.Controllers
         public ActionResult Edit(int id, FormCollection formCollection, string[] selectedCourses)
         {
             var instructorToUpdate = db.Instructors
-                .Include(i => i.OfficeAssignment)
                 .Include(i => i.Courses)
-                .Where(i => i.InstructorID == id)
+                .Where(i => i.PersonID == id)
                 .Single();
 
             // Updates the retrieved Instructor entity with values from the model binder, excluding the 

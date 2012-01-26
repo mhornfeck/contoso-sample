@@ -22,12 +22,17 @@ namespace ContosoUniversity.Models
         public DateTime StartDate { get; set; }
 
         // A department may or may not have an administrator, and an administrator is always an instructor. 
-        // Therefore the InstructorID property is included as the foreign key to the Instructor entity, 
+        // Therefore the FullName property is included as the foreign key to the Instructor entity, 
         // and a question mark is added after the int type designation to mark the property as nullable. 
         // The navigation property is named Administrator but holds an Instructor entity.
 
         [Display(Name = "Administrator")]
-        public int? InstructorID { get; set; }
+        public int? PersonID { get; set; }
+
+        // The Timestamp attribute specifies that this column will be included in the Where 
+        // clause of Update and Delete commands sent to the database.
+        [Timestamp]
+        public Byte[] Timestamp { get; set; }
 
         // By convention, the Entity Framework enables cascade delete for non-nullable foreign keys and 
         // for many-to-many relationships.
